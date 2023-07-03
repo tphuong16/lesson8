@@ -15,7 +15,7 @@
 
     createNewProdData($data);
 
-    $location = "http://localhost/learn_php/product/index.php";
+    $location = "http://localhost/lesson8/product/index.php";
     header("Location: $location");
     exit;
 ?>
