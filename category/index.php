@@ -1,6 +1,6 @@
 <?php
     require_once "pdo.php";
-    $categories = getData();
+    $category = getData();
 ?>
 
 <!DOCTYPE html>
@@ -18,40 +18,39 @@
         <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">STT</th>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Action</th>
+            <th scope="col">STT</th>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
             <?php 
                 $stt = 1;
-                foreach($categories as $category) {
-                    echo "<tr>";
-                    echo "<td>" . $stt++ . "</td>";
-                    echo "<td>" . $category['id'] . "</td>";
-                    echo "<td>" . $category['name'] . "</td>";
-                    echo "<td>";
-                    echo "<form id='delete_" . $category['id'] . "' action='delete.php' method='POST' style='display:flex'>";
-                    echo "<a href='./edit.php?id=" . $category['id'] . "' class='btn btn-dark' style='margin-right: 5px'>Edit</a>";
-                    echo "<input type='hidden' value='" . $category['id'] . "' name='id'>";
-                    echo "<a class='btn btn-dark' onclick='confirmDelete(" . $category['id'] . ")'>Delete</a>";
-                    echo "</form>";
-                    echo "</td>";
-                    echo "</tr>";
-                }
-            ?>
+                foreach($category as $value): ?>
+            <tr>
+                <td><?= $stt++; ?></td>
+                <td><?= $value['id'];?></td>
+                <td><?= $value['name'];?></td>
+                <td>
+                    <form id="delete_<?= $value['id'] ?>" action="delete.php" method="POST" style="display:flex">
+                        <a href="./edit.php?id=<?= $value['id']?>" class="btn btn-dark" style="margin-right: 5px">Edit</a>
+                        <input type="hidden" value="<?= $value['id'] ?>" name="id">
+                        <a class="btn btn-dark" onclick="confirmDelete(<?= $value['id'] ?>)">Delete</a>
+                    </form>
+                </td>
+            </tr>
+            <?php endforeach; ?>
         </tbody>
         </table>  
     </div>
     <script>
-        function confirmDelete(id) {
-            let result = confirm('Are you sure?');
-            if (result === true) {
-                document.getElementById(`delete_${id}`).submit();
-            }
+    function confirmDelete(id) {
+        let result = confirm('Are you sure?');
+        if (result === true) {
+            document.getElementById(`delete_${id}`).submit();
         }
-    </script>
+    }
+</script>
 </body>
 </html>
