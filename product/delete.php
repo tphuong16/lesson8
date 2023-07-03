@@ -6,6 +6,6 @@
     
     deleteProdData($data);
     
-    header("Location: http://localhost/learn_php/product/index.php");
+    header("Location: http://localhost/lesson8/product/index.php");
     exit;
 ?>
